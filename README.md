@@ -1,4 +1,4 @@
-# Manage Windows 10 Client with Ansible using SSH
+# Manage Windows 10 Client with Ansible - WinRM & Domain account using CredSSP
 
 ## Links
 - [Installation of OpenSSH For Windows Server 2019 and Windows 10](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse)
