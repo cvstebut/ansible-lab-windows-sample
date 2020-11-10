@@ -1,0 +1,29 @@
+---
+- hosts: cvs004
+  vars:
+    MINIKUBE_PROFILE: minikube02
+  tasks:
+
+  - name: check for existence of minikube cluster {{ MINIKUBE_PROFILE}}
+    win_command: minikube status -p {{ MINIKUBE_PROFILE}}
+    register: minikube_out
+    changed_when: false
+    failed_when: false
+
+  - name: minikube_out
+    debug:
+      msg: "{{ minikube_out.stdout }}"
+
+  - name: minikube_out stdout_lines[0]
+    debug:
+      msg: "{{ minikube_out.stdout_lines[0] }}"
+
+  - name: Should print if {{ MINIKUBE_PROFILE}} is present
+    debug:
+      msg: "Found: {{ MINIKUBE_PROFILE }}"
+    when: minikube_out.stdout_lines[0] == MINIKUBE_PROFILE
+
+  - name: Should print if {{ MINIKUBE_PROFILE}} is not present
+    debug:
+      msg: "Not Found: {{ MINIKUBE_PROFILE }}"
+    when: minikube_out.stdout_lines[0] != MINIKUBE_PROFILE    
