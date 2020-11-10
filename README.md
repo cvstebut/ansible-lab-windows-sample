@@ -1,9 +1,6 @@
 # Manage Windows 10 Client with Ansible - WinRM & Domain account using CredSSP
 
 ## Links
-- [Installation of OpenSSH For Windows Server 2019 and Windows 10](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse)
-- [docs.ansible - Windows SSH Setup](https://docs.ansible.com/ansible/latest/user_guide/windows_setup.html#windows-ssh-setup)
-- [chocolatey.org - openssh beta](https://chocolatey.org/packages/openssh/8.1.0-beta)
 - [docs.ansible - Windows WinRm setup](https://docs.ansible.com/ansible/latest/user_guide/windows_winrm.html)
 
 ### Encryption in Ansible using ansible-vault
@@ -12,18 +9,11 @@
 - [docs.ansible - Running a Playbook with Vault](https://docs.ansible.com/ansible/2.5/user_guide/playbooks_vault.html)
 - [github ansible issues - Use lookups in group var files with `set_fact`](https://github.com/ansible/ansible/issues/52290)
 
+### OpenSSH Links (not used, included for convenience)
+- [Installation of OpenSSH For Windows Server 2019 and Windows 10](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse)
+- [docs.ansible - Windows SSH Setup](https://docs.ansible.com/ansible/latest/user_guide/windows_setup.html#windows-ssh-setup)
+- [chocolatey.org - openssh beta](https://chocolatey.org/packages/openssh/8.1.0-beta)
 
-password file `~/.ci/ansible/vault-password-minikube` containing the vault password in clear text. 
-
-Stored in a secure location apart from git repo!
-
-ansible.cfg
-```ini
-[defaults]
-roles_path=../roles/internal:../roles/external
-inventory=../inventory/cvs004
-vault_password_file=~/.ci/ansible/vault-password-minikube
-```
 
 
 ## Installation and Configuration on Windows 10
@@ -44,6 +34,10 @@ Enable-WSManCredSSP -Role Server -Force
 
 ## Ansible Configuration on Linux Control Host
 
+password file `~/.ci/ansible/vault-password-minikube` contains the vault password in clear text. Stored in a secure location apart from git repo!
+
+ ansible.cfg includes the paths to the project's role and inventory folders and points to the vault password file
+
 `./plays/ansible.cfg`
 ```ini
 [defaults]
@@ -51,6 +45,7 @@ roles_path=../roles/internal:../roles/external
 inventory=../inventory/cvs004
 vault_password_file=~/.ci/ansible/vault-password-minikube
 ```
+
 
 `./inventory/cvs004/hosts`
 ```yaml
